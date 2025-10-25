@@ -24,5 +24,4 @@ class HomePage(BasePage):
         # Wait for navigation / page load completion
         self._wait_for_page_load_complete()
         self._wait_element_visibility(self._BROWSE_ICON)
-        self._wait_network_idle()
         print("Home Page loaded.")

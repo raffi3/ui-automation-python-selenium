@@ -2,3 +2,5 @@ pytest
 selenium
 assertpy
 allure-pytest
+selenium-wire
+blinker==1.7.0

@@ -24,12 +24,11 @@ class SearchResultsPage(BasePage):
         # Wait for navigation / page load completion
         self._wait_for_url_contains("/search")
         self._wait_for_page_load_complete()
-        self._wait_network_idle()
         print("Search Results Page loaded.")
 
     def open_all_channels_wait_to_load(self):
         self._click(self._VIEW_ALL_CHANNELS)
-        wait_network_to_be_idle(self.driver)
+        self._wait_for_page_load_complete()
 
     def open_streamer_page(self):
         set_content_view_consent_in_local_storage(self.driver)  # sets value in local storage to handle pop-up

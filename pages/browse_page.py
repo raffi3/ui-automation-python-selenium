@@ -16,7 +16,6 @@ class BrowsePage(BasePage):
         # Wait for navigation / page load completion
         self._wait_for_url_contains("/directory")
         self._wait_for_page_load_complete()
-        self._wait_network_idle()
         print("Browse Page loaded.")
 
         self.search = SearchBarComponent(driver)

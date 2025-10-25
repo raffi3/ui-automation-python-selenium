@@ -89,7 +89,7 @@ class BasePage:
         except TimeoutException:
             raise TimeoutException(f"Could not find or click a random element for locator: {locator}")
         except Exception as e:
-            raise f"Error clicking on element: {e}"
+            raise Exception(f"Error clicking on element: {e}") from e
 
     def _wait_for_url_contains(self, url_fragment):
         """Waits for the URL to contain a specific fragment."""
@@ -103,7 +103,7 @@ class BasePage:
         """Waits for the document.readyState to be 'complete'."""
         wait_for_page_load_complete(driver=self.driver, timeout=timeout)
 
-    def _wait_network_idle(self, timeout=7, idle_time=1.5):
+    def _wait_network_idle(self, timeout=10, idle_time=1.5):
         """Waits for the network to be 'idle' - no ongoing calls."""
         wait_network_to_be_idle(driver=self.driver, timeout=timeout, idle_time=idle_time)
 

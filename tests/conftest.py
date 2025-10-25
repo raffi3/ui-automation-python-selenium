@@ -1,5 +1,5 @@
 import pytest
-from selenium import webdriver
+from seleniumwire import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from config import IS_MOBILE, BASE_URL_MOBILE, BASE_URL_WEB
 
@@ -15,7 +15,7 @@ def is_mobile():
 
 
 @pytest.fixture(scope="function")
-def driver(request, is_mobile):  # Pass the is_mobile fixture in
+def driver(is_mobile):  # Pass the is_mobile fixture in
     """
     This fixture creates a new Chrome driver instance for each test.
     It configures the driver for mobile emulation or desktop mode

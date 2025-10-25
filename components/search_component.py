@@ -10,7 +10,6 @@ class SearchBarComponent(BasePage):
     in the NavigationComponent.
     """
     _SEARCH_INPUT = (By.CSS_SELECTOR, 'input[type="search"]')
-    _SEARCH_ICON = (By.CSS_SELECTOR, '[class*="Sc"][class*="IconWrapper"]')
 
     def __init__(self, driver):
         """Initializes the component."""

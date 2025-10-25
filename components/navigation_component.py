@@ -18,8 +18,6 @@ class NavigationComponent(BasePage):
     def go_to_browse_page(self):
         """Clicks the Browse icon and returns the BrowsePage object."""
         self._click(self._BROWSE_ICON_LINK)
-        self._wait_for_page_load_complete()
-        self._wait_network_idle()
         from pages.browse_page import BrowsePage
 
         return BrowsePage(self.driver)

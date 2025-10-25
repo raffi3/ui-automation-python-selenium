@@ -8,6 +8,7 @@ It uses `pytest` and `selenium`.
 ## Benefits
 #### Test stability 
 To ensure test stability all pages are waiting navigation and page content load completion, methods are using explict waits, hard sleeps are avoided
+Streamer page pop-up is handled by setting property in browser local storage
 
 ![UI-twitch-streamer-test](https://github.com/user-attachments/assets/1a8c6b43-13bc-452f-b25c-1e837f6475b0)
 

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage
 from components.navigation_component import NavigationComponent
@@ -11,6 +12,7 @@ class HomePage(BasePage):
 
     _BROWSE_ICON = (By.CSS_SELECTOR, "a[href='/directory']")
 
+    @allure.step("Initializing Home Page")
     def __init__(self, driver):
         """
         Calls the BasePage constructor and initializes components.

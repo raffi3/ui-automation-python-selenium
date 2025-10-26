@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage
 from components.search_component import SearchBarComponent
@@ -13,8 +14,9 @@ class SearchResultsPage(BasePage):
     _SECTION_TITLE = (By.CSS_SELECTOR, 'h2[class*="CoreText"][class*="ScTitleText"]')
     _VIEW_ALL_CHANNELS = (By.CSS_SELECTOR,
                           ':is([class*="ScCoreLink"][href*="type=channels"], [data-test-selector*="show-more-channels"] p)')
-    _STREAMER = (By.CSS_SELECTOR, '[class*="ScCoreLink"] p')  # Todo make one for desktop as well
+    _STREAMER = (By.CSS_SELECTOR, 'button[class*="ScCoreLink"] p')  # Todo make one for desktop as well
 
+    @allure.step("Initializing Search Results Page")
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -26,10 +28,12 @@ class SearchResultsPage(BasePage):
         self._wait_for_page_load_complete()
         print("Search Results Page loaded.")
 
+    @allure.step("Opening 'View All Channels' page")
     def open_all_channels_wait_to_load(self):
         self._click(self._VIEW_ALL_CHANNELS)
         self._wait_for_page_load_complete()
 
+    @allure.step("Opening a random streamer page")
     def open_streamer_page(self):
         set_content_view_consent_in_local_storage(self.driver)  # sets value in local storage to handle pop-up
         self._click_random_element_same_locator(self._STREAMER)

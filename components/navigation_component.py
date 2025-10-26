@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage
 from components.search_component import SearchBarComponent
@@ -5,8 +6,7 @@ from components.search_component import SearchBarComponent
 
 class NavigationComponent(BasePage):
     """
-    Models the top navigation bar.
-    This component is present on most pages.
+    Component for the navigation bar. It is present on most pages.
     """
     _BROWSE_ICON_LINK = (By.CSS_SELECTOR, "a[href='/directory']")
 
@@ -15,6 +15,7 @@ class NavigationComponent(BasePage):
         self.search_bar = SearchBarComponent(driver)
 
 
+    @allure.step("Clicking 'Browse' icon on nav bar")
     def go_to_browse_page(self):
         """Clicks the Browse icon and returns the BrowsePage object."""
         self._click(self._BROWSE_ICON_LINK)

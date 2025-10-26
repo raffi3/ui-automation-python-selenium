@@ -1,7 +1,9 @@
+import allure
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions.interaction import POINTER_TOUCH
 
 
+@allure.step("Scrolling page down {times} time(s)")
 def scroll_page_down(driver, times: int = 1):
     """
     Scrolls the page down by the mobile window's inner height, 'times' number of times.

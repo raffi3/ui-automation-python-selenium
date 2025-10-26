@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from base.base_page import BasePage
@@ -6,8 +7,7 @@ from base.base_page import BasePage
 class SearchBarComponent(BasePage):
     """
     Component for the search bar (input and submit logic).
-    This component appears after clicking the search icon
-    in the NavigationComponent.
+    This component is present on Navigation Component.
     """
     _SEARCH_INPUT = (By.CSS_SELECTOR, 'input[type="search"]')
 
@@ -15,13 +15,9 @@ class SearchBarComponent(BasePage):
         """Initializes the component."""
         super().__init__(driver)
 
-    def wait_for_input_ready(self):
-        """Waits for the search input field to be visible."""
-        print("Waiting for search input to be ready...")
-        self._wait_element_visibility(self._SEARCH_INPUT)
-        print("Search input is ready.")
 
     # Private Methods
+    @allure.step("Clicking into search bar")
     def _click_into_search_bar(self):
         """
         Activates the search input field.
@@ -29,6 +25,7 @@ class SearchBarComponent(BasePage):
         """
         self._click(self._SEARCH_INPUT)
 
+    @allure.step("Entering search query: {keyword}")
     def _enter_search_query(self, keyword: str):
         """
         Types the search query into the field.
@@ -37,6 +34,7 @@ class SearchBarComponent(BasePage):
         # The _type method in BasePage handles clear() and send_keys()
         self._type(self._SEARCH_INPUT, keyword)
 
+    @allure.step("Submitting search (hitting ENTER)")
     def _submit_search(self):
         """
         Submits the search query by pressing ENTER.
@@ -46,6 +44,7 @@ class SearchBarComponent(BasePage):
         self._hit_key(self._SEARCH_INPUT, Keys.ENTER)
 
     # Public Method
+    @allure.step("Performing search for: {keyword}")
     def search(self, keyword: str):
         """
         Performs a full search action:
@@ -61,4 +60,3 @@ class SearchBarComponent(BasePage):
 
         from pages.search_results_page import SearchResultsPage
         return SearchResultsPage(self.driver)
-

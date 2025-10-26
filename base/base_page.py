@@ -1,3 +1,5 @@
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -28,6 +30,7 @@ class BasePage:
             ignored_exceptions=[StaleElementReferenceException]
         )
 
+    @allure.step("Waiting for element to be visible: {locator}")
     def _wait_element_visibility(self, locator: WebElement | tuple[str, str]):
         """Finds an element, waiting for it to be visible."""
         try:
@@ -35,6 +38,7 @@ class BasePage:
         except TimeoutException:
             raise TimeoutException(f"Element not found or not visible: {locator}")
 
+    @allure.step("Waiting for all elements to be visible: {locator}")
     def _wait_elements_visibility(self, locator: WebElement | tuple[str, str]):
         """Finds multiple elements, waiting for them to be visible."""
         try:
@@ -42,6 +46,7 @@ class BasePage:
         except TimeoutException:
             raise TimeoutException(f"Elements not found or not visible: {locator}")
 
+    @allure.step("Clicking element: {locator}")
     def _click(self, locator: WebElement | tuple[str, str]):
         """Finds an element, waits for it to be clickable, and then clicks."""
         try:
@@ -52,28 +57,31 @@ class BasePage:
             element = self._wait_element_visibility(locator)
             self.driver.execute_script("arguments[0].click();", element)
 
+    @allure.step("Typing '{text}' into element: {locator}")
     def _type(self, locator: WebElement | tuple[str, str], text: str):
         """Finds an element, clears it, and types text into it."""
         element = self._wait_element_visibility(locator)
         element.clear()
         element.send_keys(text)
 
+    @allure.step("Hitting key '{key}' on element: {locator}")
     def _hit_key(self, locator: WebElement | tuple[str, str], key: str):
         """Finds an element, clears it, send keyboard key e.g. Keys.Enter."""
         element = self._wait_element_visibility(locator)
         element.send_keys(key)
 
+    @allure.step("Getting text from element: {locator}")
     def _get_text(self, locator: WebElement | tuple[str, str]) -> str:
         """Finds an element and returns its text."""
         element = self._wait_element_visibility(locator)
         return element.text
 
+    @allure.step("Clicking a random element from list: {locator}")
     def _click_random_element_same_locator(self, locator: WebElement | tuple[str, str]):
         """
         Finds all elements matching a locator and clicks one at random.
         Useful for selecting from a list of similar items (e.g., search results).
         """
-        print(f"Finding random element for locator: {locator}")
         try:
             elements = self._wait_elements_visibility(locator)
             if not elements:
@@ -91,6 +99,7 @@ class BasePage:
         except Exception as e:
             raise Exception(f"Error clicking on element: {e}") from e
 
+    @allure.step("Waiting for URL to contain: {url_fragment}")
     def _wait_for_url_contains(self, url_fragment):
         """Waits for the URL to contain a specific fragment."""
         try:
@@ -99,23 +108,27 @@ class BasePage:
             raise TimeoutException(
                 f"URL did not change to contain '{url_fragment}'. Current URL: '{self.driver.current_url}'")
 
+    @allure.step("Waiting for page load to complete")
     def _wait_for_page_load_complete(self, timeout=15):
         """Waits for the document.readyState to be 'complete'."""
         wait_for_page_load_complete(driver=self.driver, timeout=timeout)
 
+    @allure.step("Waiting for network to be idle")
     def _wait_network_idle(self, timeout=10, idle_time=1.5):
         """Waits for the network to be 'idle' - no ongoing calls."""
         wait_network_to_be_idle(driver=self.driver, timeout=timeout, idle_time=idle_time)
 
+    @allure.step("Scrolling page down {times} time(s)")
     def scroll_page_down(self, times: int = 1):
         """
         Scrolls the page down by the mobile window's inner height, 'times' number of times.
         """
         scroll_page_down(self.driver, times)
 
+    @allure.step("Taking screenshot: {filename}")
     def take_screenshot(self, filename):
         """
-        Takes a screenshot and saves it to a 'screenshots' directory.
+        Takes a screenshot, saves it, and attaches it to the Allure report.
         """
         # Ensure the screenshots directory exists
         ss_dir = "screenshots"
@@ -126,5 +139,13 @@ class BasePage:
         try:
             self.driver.save_screenshot(filepath)
             print(f"Screenshot saved to {filepath}")
+
+            with open(filepath, "rb") as f:
+                allure.attach(
+                    f.read(),
+                    name=filename,
+                    attachment_type=AttachmentType.PNG
+                )
+
         except Exception as e:
-            print(f"Error saving screenshot: {e}")
+            print(f"Error saving or attaching screenshot: {e}")

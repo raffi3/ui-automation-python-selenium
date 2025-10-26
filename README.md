@@ -29,3 +29,30 @@ Streamer page pop-up is handled by setting property in browser local storage
     ```bash
     pip install -r requirements.txt
     ```
+
+# Test Run
+
+### Standard Pytest Run
+
+From the root directory, run:
+
+```bash
+pytest .
+```
+
+### Allure Reporting
+
+This framework is configured to generate Allure reports.
+
+1.  **Run tests & Generate Allure data:**
+    ```bash
+    pytest --alluredir=allure-results
+    ```
+    (This runs all tests and saves the results to the `allure-results` folder, clearing old results first)
+
+2.  **Serve the Allure Report:**
+    Once the tests are finished, run:
+    ```bash
+    allure serve allure-results
+    ```
+    This will open the interactive Allure report in your web browser.

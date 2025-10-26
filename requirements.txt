@@ -4,3 +4,4 @@ assertpy
 allure-pytest
 selenium-wire
 blinker==1.7.0
+flake8

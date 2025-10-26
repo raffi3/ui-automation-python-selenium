@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.common.by import By
 from base.base_page import BasePage
 from components.navigation_component import NavigationComponent
 from components.search_component import SearchBarComponent
@@ -9,7 +8,7 @@ class BrowsePage(BasePage):
     """
     Page Object for the Browse Page (/directory).
     """
-    
+
     @allure.step("Initializing Browse Page")
     def __init__(self, driver):
         super().__init__(driver)

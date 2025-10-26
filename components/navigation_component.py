@@ -14,7 +14,6 @@ class NavigationComponent(BasePage):
         super().__init__(driver)
         self.search_bar = SearchBarComponent(driver)
 
-
     @allure.step("Clicking 'Browse' icon on nav bar")
     def go_to_browse_page(self):
         """Clicks the Browse icon and returns the BrowsePage object."""

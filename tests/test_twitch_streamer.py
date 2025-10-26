@@ -19,7 +19,8 @@ class TestTwitch:
     )
     def test_search_and_select_streamer(self, driver, is_mobile):
         """
-        Note: To ensure test stability all pages are waiting navigation and page content load completion, methods are using explict waits and hard sleeps are avoided
+        Note: To ensure test stability all pages are waiting navigation and page content load completion,
+        methods are using explict waits and hard sleeps are avoided
         """
         home_page = HomePage(driver)
 

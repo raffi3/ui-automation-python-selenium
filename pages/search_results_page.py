@@ -2,7 +2,6 @@ import allure
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage
 from components.search_component import SearchBarComponent
-from utils.waiters import wait_network_to_be_idle
 from utils.browser_storage import set_content_view_consent_in_local_storage
 
 

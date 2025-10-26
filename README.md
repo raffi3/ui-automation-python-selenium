@@ -5,19 +5,24 @@ It uses `pytest` and `selenium`.
 
 
 
-## Benefits
+### Benefits
 #### Test stability 
-To ensure test stability all pages are waiting navigation and page content load completion, methods are using explicit waits, hard sleeps are avoided
-Streamer page pop-up is handled by setting property in browser local storage
+- To ensure test stability all pages are waiting navigation and page content load completion, methods are using explicit waits and hard sleeps are avoided
+- Streamer page pop-up is handled by setting property in browser local storage
+- Network call polling interceptor is used to wait video content load
+#### Structural
+- The test is designed to work not only on web mobile emulator, but with perspective to work on desktop version as well (after minimal additions), since in real life scenario the test should be capable to support both versions
+- The navigation component — along with its embedded search bar — has been implemented as a reusable component since it appears on multiple pages.
+
 
 ![UI-twitch-streamer-test](https://github.com/user-attachments/assets/1a8c6b43-13bc-452f-b25c-1e837f6475b0)
 
 
-## Result
+### Result
 <img width="640" height="1136" alt="streamer_page_view" src="https://github.com/user-attachments/assets/90ebf1ef-f80b-44a1-8967-0073f2c4fd85" />
 
 
-## Setup
+### Setup
 
 1.  **Clone the repository**
 2.  **Create a virtual environment:**
@@ -30,7 +35,6 @@ Streamer page pop-up is handled by setting property in browser local storage
     pip install -r requirements.txt
     ```
 
-# Test Run
 
 ### Standard Pytest Run
 
@@ -56,3 +60,43 @@ This framework is configured to generate Allure reports.
     allure serve allure-results
     ```
     This will open the interactive Allure report in your web browser.
+
+### Project structure
+```text
+ui-automation-python-selenium/
+├── base/                   # Core framework logic
+│   ├── __init__.py
+│   └── base_page.py        # Parent class for all Page Objects. Contains base methods
+│                           # like _click, _type, and explicit waits.
+│
+├── components/             # Reusable UI modules (parts of a page)
+│   ├── __init__.py
+│   ├── navigation_component.py # POM for the main navigation bar
+│   └── search_component.py     # POM for the search bar logic
+│
+├── pages/                  # Page Object Model (POM) classes, one for each page
+│   ├── __init__.py
+│   ├── browse_page.py      # POM class for the "Browse" page
+│   ├── home_page.py        # POM class for the main Home page
+│   ├── search_results_page.py # POM class for the search results list
+│   └── streamer_page.py    # POM class for an individual streamer's page
+│
+├── screenshots/            # Stores screenshots taken during test runs 
+│
+├── tests/                  # Contains all automated test scripts
+│   ├── __init__.py
+│   ├── conftest.py         # PyTest fixtures (e.g., driver setup, mobile emulation)
+│   └── test_twitch_streamer.py # The test script for the Twitch search scenario
+│
+├── utils/                  # Helper modules for various tasks
+│   ├── __init__.py
+│   ├── browser_storage.py  # Helpers for managing localStorage/sessionStorage
+│   ├── data_provider.py    # For loading and providing test data
+│   ├── mobile_gestures.py  # Functions for mobile-specific actions (swipes, etc.)
+│   └── waiters.py          # Custom or complex wait conditions
+│
+├── .gitignore              # Specifies files and folders for Git to ignore
+├── config.py               # Central configuration (e.g., IS_MOBILE, URLs)
+├── README.md               # Project documentation (this file)
+└── requirements.txt        # List of Python dependencies (selenium, pytest, etc.)
+```

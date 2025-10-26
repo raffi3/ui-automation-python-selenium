@@ -4,10 +4,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
-import time
-import os, random
-from selenium.webdriver.common.keys import Keys
-
+import os
+import random
 from utils.mobile_gestures import scroll_page_down
 from utils.waiters import wait_for_page_load_complete, wait_network_to_be_idle
 

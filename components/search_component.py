@@ -15,7 +15,6 @@ class SearchBarComponent(BasePage):
         """Initializes the component."""
         super().__init__(driver)
 
-
     # Private Methods
     @allure.step("Clicking into search bar")
     def _click_into_search_bar(self):

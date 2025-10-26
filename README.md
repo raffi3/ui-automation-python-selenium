@@ -63,6 +63,9 @@ This framework is configured to generate Allure reports.
     ```
     This will open the interactive Allure report in your web browser.
 
+<img width="1152" height="642" alt="UI Allure result 2" src="https://github.com/user-attachments/assets/7056aedd-2de9-44ba-82f2-a3382c190a40" />
+
+
 ### Project structure
 ```text
 ui-automation-python-selenium/

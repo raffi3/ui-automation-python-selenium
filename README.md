@@ -1,3 +1,4 @@
+
 # UI Automation for Twitch
 This is a Python-based UI test automation framework for Twitch.
 It uses `pytest` and `selenium`.
@@ -14,12 +15,13 @@ It uses `pytest` and `selenium`.
 - The test is designed to work not only on web mobile emulator, but with perspective to work on desktop version as well (after minimal additions), since in real life scenario the test should be capable to support both versions
 - The navigation component — along with its embedded search bar — has been implemented as a reusable component since it appears on multiple pages.
 
+![UI-twitch-streamer-test-2](https://github.com/user-attachments/assets/98a332c6-b2e1-4720-a4e4-7fbf6bd6b0a1)
 
-![UI-twitch-streamer-test](https://github.com/user-attachments/assets/1a8c6b43-13bc-452f-b25c-1e837f6475b0)
+
 
 
 ### Result
-<img width="640" height="1136" alt="streamer_page_view" src="https://github.com/user-attachments/assets/90ebf1ef-f80b-44a1-8967-0073f2c4fd85" />
+<img width="320" height="568" alt="streamer_page_view" src="https://github.com/user-attachments/assets/776f60d2-63f7-4320-9226-afe1c05a331e" />
 
 
 ### Setup

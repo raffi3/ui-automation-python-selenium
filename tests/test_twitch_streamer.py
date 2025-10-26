@@ -1,21 +1,26 @@
 import pytest
+import allure
 from pages.home_page import HomePage
 
 
+@allure.story("Twitch tests")
 @pytest.mark.usefixtures("driver")
 class TestTwitch:
 
+    @allure.title("Test: Search for a streamer, open their page, and take a screenshot")
+    @allure.description(
+        "1. Navigates to Twitch home page (handled by fixture)\n"
+        "2. Go to browse page (if in mobile view)\n"
+        "3. Search by keyword\n"
+        "4. View all channels\n"
+        "5. Scrolls down 2 times\n"
+        "6. Selects a streamer (handle pop-up for content view)\n"
+        "7. Wait streamer's page to be loaded & Takes a screenshot"
+    )
     def test_search_and_select_streamer(self, driver, is_mobile):
         """
-        Test description::
-        1. Navigates to Twitch home page (handled by fixture)
-        2. Go to brows page (if in mobile view)
-        3. Search by keyword
-        4. View all channels
-        5. Scrolls down 2 times
-        6. Selects a streamer (handle pop-up for content view)
-        7. Wait streamer's page to be loaded & Takes a screenshot
-        Note: To ensure test stability all pages are waiting navigation and page content load completion, methods are using explict waits, hard sleeps are avoided
+        Note: To ensure test stability all pages are waiting navigation and page content load completion,
+        methods are using explict waits and hard sleeps are avoided
         """
         home_page = HomePage(driver)
 
